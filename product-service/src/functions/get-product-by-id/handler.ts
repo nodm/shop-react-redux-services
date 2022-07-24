@@ -5,7 +5,7 @@ import { middyfy } from '@libs/lambda';
 import { ProductService } from '@services/product';
 
 const getProductById = async (event): Promise<APIGatewayProxyResult> => {
-  console.log(event);
+  console.log('Lambda getProductById::event', event);
 
   const productId = event.pathParameters.id;
 

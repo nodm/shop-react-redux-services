@@ -5,7 +5,7 @@ import { middyfy } from '@libs/lambda';
 import { ProductService } from '@services/product';
 
 const getProductList = async (event): Promise<APIGatewayProxyResult> => {
-  console.log(event);
+  console.log('Lambda getProductList::event', event);
 
   try {
     const productService = new ProductService();

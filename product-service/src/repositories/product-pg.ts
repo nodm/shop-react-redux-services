@@ -1,13 +1,48 @@
-import { Client, ClientConfig } from 'pg';
+import { Client, ClientConfig, Pool } from 'pg';
 
-import { ProductDTO } from '@models/product';
+import { CreateProductDTO, ProductDTO } from '@models/product';
 import { ProductRepository } from './product.type';
 
 export class ProductPg implements ProductRepository {
-  private client: Client;
+  constructor(private readonly connectionParams = getPGConnectionParams()) {
+  }
 
-  constructor(connectionParams = getPGConnectionParams()) {
-    this.client = new Client(connectionParams);
+  public  async addProduct(product: CreateProductDTO): Promise<ProductDTO> {
+    const pool = new Pool(this.connectionParams);
+    const client = await pool.connect();
+    let id;
+
+    try {
+      const {
+        title,
+        description,
+        imageUrl,
+        price,
+        count,
+      } = product;
+
+      await client.query("BEGIN");
+
+      const productQuery = `
+        INSERT INTO public.product
+          (title, description, image_url, price) VALUES ($1, $2, $3, $4)
+          RETURNING id;`;
+      const { rows } = await client.query(productQuery, [title, description, imageUrl, price]);
+      const [newProduct] = rows;
+      id = newProduct.id;
+
+      const stockQuery = `INSERT INTO public.stocks (id, count) VALUES ($1, $2);`;
+      await client.query(stockQuery, [newProduct.id, count]);
+
+      await client.query('COMMIT');
+    } catch (e) {
+      await client.query("ROLLBACK");
+      throw e;
+    } finally {
+      client.release();
+    }
+
+    return { id, ...product };
   }
 
   public async getProductList(): Promise<ProductDTO[]> {
@@ -31,15 +66,16 @@ export class ProductPg implements ProductRepository {
   }
 
   private async sendQuery(query: string) {
+    const client = new Client(this.connectionParams);
     let queryResults;
 
     try {
-      await this.client.connect();
-      queryResults = await this.client.query(query);
+      await client.connect();
+      queryResults = await client.query(query);
     } catch(e) {
       throw e;
     } finally {
-      await this.client.end();
+      await client.end();
     }
 
     return queryResults.rows;
