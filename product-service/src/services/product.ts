@@ -1,14 +1,16 @@
-import { Product } from '@models/product';
-import { PRODUCTS } from './product-data';
+import { ProductDTO } from '@models/product';
+
+import { ProductRepository, productRepository } from '@repositories/index';
 
 export class ProductService {
-  constructor() {}
-
-  async getProducts(): Promise<Product[]> {
-    return PRODUCTS;
+  constructor(private repository: ProductRepository = productRepository) {
   }
 
-  async getProductById(id: string): Promise<Product | undefined> {
-    return PRODUCTS.find((product) => product.id === id);
+  async getProducts(): Promise<ProductDTO[]> {
+    return this.repository.getProductList();
+  }
+
+  async getProductById(id: string): Promise<ProductDTO | undefined> {
+    return this.repository.getProductById(id);
   }
 }
