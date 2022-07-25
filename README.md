@@ -1,3 +1,14 @@
+## Module 04: Integration with Database
+
+### API Gateway
+* [GET `/products` endpoint to fetch a product list](https://jdpcg4ienj.execute-api.us-east-1.amazonaws.com/dev/products)
+* [POST `/products` endpoint to add a new product](https://jdpcg4ienj.execute-api.us-east-1.amazonaws.com/dev/products)
+* [GET `/products/{id}` endpoint to fetch an individual product](https://jdpcg4ienj.execute-api.us-east-1.amazonaws.com/dev/products/12f39fc4-e5fe-4785-8152-493dde93ee5f)
+
+### Cloudfront
+* [Website on Cloudfront](https://d2oxj55y64zodz.cloudfront.net/)
+
+
 ## Module 03: Serverless API
 
 ### API Gateway
