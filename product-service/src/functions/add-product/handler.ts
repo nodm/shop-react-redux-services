@@ -4,17 +4,16 @@ import { ValidatedEventAPIGatewayProxyEvent, formatJSONResponse } from '@libs/ap
 import { middyfy } from '@libs/lambda';
 import { ProductService } from '@services/product';
 import schema from './schema';
+import { validateReqBody } from './validators';
 
 const addProduct: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ): Promise<APIGatewayProxyResult> => {
   console.log('Lambda addProduct::event', event);
 
-  if (!event.body) {
-    return formatJSONResponse(
-      { message: 'Product data should be provided in the body.' },
-      400
-    );
+  const errors = validateReqBody(event.body);
+  if (errors) {
+    return formatJSONResponse(errors, 400);
   }
 
   try {

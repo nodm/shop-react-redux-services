@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS public.products
     title text NOT NULL,
     description text NOT NULL,
     image_url text NOT NULL,
-    price numeric NOT NULL,
+    price numeric(11,2) NOT NULL,
     PRIMARY KEY (id)
 );
 
