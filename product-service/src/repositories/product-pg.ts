@@ -24,14 +24,14 @@ export class ProductPg implements ProductRepository {
       await client.query("BEGIN");
 
       const productQuery = `
-        INSERT INTO public.product
+        INSERT INTO products
           (title, description, image_url, price) VALUES ($1, $2, $3, $4)
           RETURNING id;`;
       const { rows } = await client.query(productQuery, [title, description, imageUrl, price]);
       const [newProduct] = rows;
       id = newProduct.id;
 
-      const stockQuery = `INSERT INTO public.stocks (id, count) VALUES ($1, $2);`;
+      const stockQuery = `INSERT INTO stocks (id, count) VALUES ($1, $2);`;
       await client.query(stockQuery, [newProduct.id, count]);
 
       await client.query('COMMIT');
@@ -48,8 +48,8 @@ export class ProductPg implements ProductRepository {
   public async getProductList(): Promise<ProductDTO[]> {
     const query = `
       SELECT a.id, a.title, a.description, a.image_url, a.price, b.count
-        FROM public.products AS a
-        INNER JOIN public.stocks AS b ON a.id=b.id`;
+        FROM products AS a
+        INNER JOIN stocks AS b ON a.id=b.id`;
 
     return await this.sendQuery(query);
   }
@@ -57,9 +57,9 @@ export class ProductPg implements ProductRepository {
   public async getProductById(productId: string): Promise<ProductDTO> {
     const query = `
       SELECT a.id, a.title, a.description, a.image_url, a.price, b.count
-        FROM public.products AS a
-        INNER JOIN public.stocks AS b ON a.id=b.id
-        WHERE a.id=${productId}`;
+        FROM products AS a
+        INNER JOIN stocks AS b ON a.id=b.id
+        WHERE a.id='${productId}'`;
     const [product] = await this.sendQuery(query);
 
     return product;
