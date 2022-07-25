@@ -78,7 +78,10 @@ export class ProductPg implements ProductRepository {
       await client.end();
     }
 
-    return queryResults.rows;
+    return queryResults.rows.map(({ image_url: imageUrl, ...rest }) => ({
+      imageUrl,
+      ...rest,
+    }));
   };
 }
 
