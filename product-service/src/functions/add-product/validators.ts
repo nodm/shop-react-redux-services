@@ -14,12 +14,13 @@ const reqBodySchema = Joi.object({
     .required(),
   price: Joi.number()
     .min(0.01)
-    .max(999_999_999.99),
+    .max(999_999_999.99)
+    .required(),
   count: Joi.number()
     .integer()
     .min(1)
-    .max(1_000_000),
-
+    .max(1_000_000)
+    .required(),
 });
 
 export const validateReqBody = (body: unknown): null | { message: string, details: string | string[] } => {
