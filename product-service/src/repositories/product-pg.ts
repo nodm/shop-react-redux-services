@@ -59,7 +59,7 @@ export class ProductPg implements ProductRepository {
       SELECT a.id, a.title, a.description, a.image_url, a.price, b.count
         FROM products AS a
         INNER JOIN stocks AS b ON a.id=b.id
-        WHERE a.id='${productId}'`;
+        WHERE a.id::text='${productId}'`;
     const [product] = await this.sendQuery(query);
 
     return product;
