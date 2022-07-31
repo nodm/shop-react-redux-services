@@ -5,6 +5,7 @@
       "@functions/*": ["src/functions/*"],
       "@libs/*": ["src/libs/*"],
       "@models/*": ["src/models/*"],
+      "@repositories/*": ["src/repositories/*"],
       "@services/*": ["src/services/*"]
     }
   }
