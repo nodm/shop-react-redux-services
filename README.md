@@ -1,3 +1,21 @@
+## Module 05: Integration with S3
+* [GET `/import?name=test.csv` - get signed URL for S3 uploading](https://jkrxmfyj25.execute-api.us-east-1.amazonaws.com/dev/import?name=test.csv)
+* File parsing results:
+
+  `test.csv`
+  ```cvs
+    foo,bar
+    1,One
+    2,Two
+    3,Hello, World!
+  ```
+  ![CloudWatch log for CSV parsing result](./task-05.png)
+
+
+### Cloudfront
+* [Website on Cloudfront](https://d2oxj55y64zodz.cloudfront.net/)
+
+
 ## Module 04: Integration with Database
 
 ### API Gateway
