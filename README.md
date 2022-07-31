@@ -8,7 +8,7 @@
     1,One
     2,Two
     3,Hello, World!
-```
+  ```
   ![CloudWatch log for CSV parsing result](./task-05.png)
 
 
