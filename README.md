@@ -5,7 +5,8 @@
 -[x] 4 - File serverless.yml contains configuration for SNS Topic createProductTopic and email subscription
 
 -[ ] +1 - catalogBatchProcess lambda is covered by unit tests
--[ ] +1 - set a Filter Policy for SNS createProductTopic in serverless.yml (Create an additional email subscription and distribute messages to different emails depending on the filter for any product attribute)
+-[ ] +1 - set a Filter Policy for SNS createProductTopic in serverless.yml
+(Create an additional email subscription and distribute messages to different emails depending on the filter for any product attribute)
 
 CSV example
 ```cvs
@@ -20,6 +21,9 @@ title,description,imageUrl,price,count
 "Electronic Frozen Soap","The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",https://loremflickr.com/640/480/business?90934,814.00,84
 "Ergonomic Cotton Salad","The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",https://loremflickr.com/640/480/business?47367,216.00,28
 ```
+
+### Cloudfront
+* [Website on Cloudfront](https://d2oxj55y64zodz.cloudfront.net/admin/products)
 
 
 ## Module 05: Integration with S3

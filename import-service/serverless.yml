@@ -68,6 +68,9 @@ resources:
         Protocol: email
         TopicArn:
           Ref: SNSTopic
+        # Currently, you can't use SNS filters to apply OR logic across different message attributes.
+        # Instead, you can use multiple SNS subscriptions with different endpoints to achieve the same effect.
+        FilterPolicy: '{ "price": [{ "numeric": [">=", 750] }], "count": [{ "numeric": [">=", 50] }] }'
 functions:
   importFileParser:
     handler: src/functions/import-file-parser/handler.main

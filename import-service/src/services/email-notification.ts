@@ -1,15 +1,26 @@
 import { SNS } from 'aws-sdk';
-import { Product } from '../models/product';
+import { ProductDTO } from '../models/product';
 
 class EmailNotificationService {
   private readonly sns = new SNS();
 
-  public async send(productList: Product[]): Promise<void> {
+  public async send(product: ProductDTO): Promise<void> {
     await this.sns.publish({
-      Subject: `${productList.length} products are added to the shop.`,
-      Message: JSON.stringify(productList),
-      TopicArn: process.env.SNS_ARN,
-    }).promise();
+        TopicArn: process.env.SNS_ARN,
+        Subject: `Price and count alert: "${product.title}"`,
+        Message: JSON.stringify(product),
+        MessageAttributes: {
+          price: {
+            DataType: 'Number',
+            StringValue: product.price.toString(),
+          },
+          count: {
+            DataType: 'Number',
+            StringValue: product.count.toString(),
+          },
+        },
+      },
+    ).promise();
   }
 }
 
