@@ -21,7 +21,8 @@ provider:
     SNS_TOPIC_NAME: createProductTopic
     SNS_ARN:
       Ref: SNSTopic
-    EMAIL: nodm.pe@gmail.com
+    EMAIL_PRICING_ALERT: nodm.pe@gmail.com
+    EMAIL_COUNT_ALERT: dgnovikov@gmail.com
   iam:
     role:
       statements:
@@ -61,16 +62,22 @@ resources:
       Type: AWS::SNS::Topic
       Properties:
         TopicName: '${self:provider.environment.SNS_TOPIC_NAME}'
-    SNSSubscription:
+    SNSPricingAlertSubscription:
       Type: AWS::SNS::Subscription
       Properties:
-        Endpoint: '${self:provider.environment.EMAIL}'
+        Endpoint: ${self:provider.environment.EMAIL_PRICING_ALERT}
         Protocol: email
         TopicArn:
           Ref: SNSTopic
-        # Currently, you can't use SNS filters to apply OR logic across different message attributes.
-        # Instead, you can use multiple SNS subscriptions with different endpoints to achieve the same effect.
-        FilterPolicy: '{ "price": [{ "numeric": [">=", 750] }], "count": [{ "numeric": [">=", 50] }] }'
+        FilterPolicy: '{ "price": [{ "numeric": [">=", 900] }] }'
+    SNSCountAlertSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: ${self:provider.environment.EMAIL_COUNT_ALERT}
+        Protocol: email
+        TopicArn:
+          Ref: SNSTopic
+        FilterPolicy: '{ "count": [{ "numeric": [">=", 90] }] }'
 functions:
   importFileParser:
     handler: src/functions/import-file-parser/handler.main
