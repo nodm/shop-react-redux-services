@@ -1,3 +1,25 @@
+## Module 07: Authorization
+- [x]  1 - authorization-service is added to the repo, has correct basicAuthorizer lambda and correct serverless.yaml file
+- [x]  3 - Import Service serverless.yaml file has authorizer configuration for the importProductsFile lambda.
+          Request to the importProductsFile lambda should work only with correct authorization_token being decoded and
+          checked by basicAuthorizer lambda. Response should be in 403 HTTP status if access is denied for this user
+          (invalid authorization_token) and in 401 HTTP status if Authorization header is not provided.
+- [x]  5 - Client application is updated to send "Authorization: Basic authorization_token" header on import.
+          Client should get authorization_token value from browser localStorage
+- [x] +1 - Client application should display alerts for the responses in 401 and 403 HTTP statuses. This behavior should
+          be added to the `nodejs-aws-fe-main/src/index.tsx` file.
+
+### Cloudfront
+* [PR](https://github.com/nodm/shop-react-redux-cloudfront/pull/4)
+* [Website on Cloudfront](https://d2oxj55y64zodz.cloudfront.net/admin/products)
+
+To make requests as an authorized customer (to import products from a CSV file):
+* generate an authorization token by running ```Buffer.from(`${userName}::${password}`).toString('base64')```
+  _(replace `userName` and `password` as described in the task)_.
+* create in the `localStorage` an item with the key `authorization_token` and generated on the previous step token as
+  the value (do not add `Basic ` at the beginning).
+
+
 ## Module 06: SQS & SNS, Async Microservices Communication
 -[x] 1 - File serverless.yml contains configuration for catalogBatchProcess function
 -[x] 2 - File serverless.yml contains policies to allow lambda catalogBatchProcess function to interact with SNS and SQS

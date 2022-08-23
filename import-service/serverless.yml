@@ -78,6 +78,26 @@ resources:
         TopicArn:
           Ref: SNSTopic
         FilterPolicy: '{ "count": [{ "numeric": [">=", 90] }] }'
+    GatewayResponse401:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'
+    GatewayResponse403:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: ACCESS_DENIED
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '403'
 functions:
   importFileParser:
     handler: src/functions/import-file-parser/handler.main
@@ -97,6 +117,12 @@ functions:
           method: get
           path: /import
           cors: true
+          authorizer:
+            name: basicAuthorizer
+            arn: arn:aws:lambda:us-east-1:132607875995:function:authorization-service-dev-basicAuthorizer
+            resultTtlInSeconds: 300
+            identitySource: method.request.header.Authorization
+            type: token
           request:
             parameters:
               querystrings:
@@ -114,7 +140,6 @@ functions:
     name: import-service-dev-catalogBatchProcess
 package:
   individually: true
-  artifactsS3KeyDirname: serverless/import-service/dev/code-artifacts
 custom:
   esbuild:
     bundle: true
