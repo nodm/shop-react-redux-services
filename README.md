@@ -1,3 +1,31 @@
+## Module 09: Backend for Frontend
+### Application Functionality
+
+By this point your application must be able to do:
+
+- [ ] Products representation on Home page should be based on Product Service API.
+- [ ] Products are coming from Product DB.
+- [ ] Product images are not randomly generated on client side. Product image, same as another product model information
+should be stored on BE side in Product DB.
+- [ ] Products might be created through CSV product file import from client side.
+- [ ] Cart might be created with appropriate product set.
+- [ ] Auth logic should be in place
+
+Additional (optional) tasks
+
+- [ ] +1 - Add a cache at the BFF Service level for a request to the getProductsList lambda function of the Product
+Service. The cache should expire in 2 minutes.
+
+    How to test:
+    - Get products list
+    - Create new product
+    - Get products list - result shouldn’t have new product
+    - Wait more than 2 minutes
+    - Get products list - result should have new product
+
+- [ ] +1 - Use NestJS to create BFF Service instead of Express
+
+
 ## Module 07: Authorization
 - [x]  1 - authorization-service is added to the repo, has correct basicAuthorizer lambda and correct serverless.yaml file
 - [x]  3 - Import Service serverless.yaml file has authorizer configuration for the importProductsFile lambda.
