@@ -7,7 +7,7 @@
     "start": "node index.mjs",
     "start:dev": "nodemon index.mjs",
     "eb-init": "eb init --platform node.js --region us-east-1",
-    "eb-create": "eb create develop --single --cname nodm-bff-develop",
+    "eb-create": "eb create development --single --cname nodm-bff-develop",
     "eb-terminate": "eb terminate"
   },
   "author": "",

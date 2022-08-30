@@ -2,7 +2,7 @@ import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import 'dotenv/config';
 
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 4000;
 const SERVICE_URL_REGEXP = /(.*)_SERVICE_URL$/;
 
 const availableServices = [];
@@ -18,7 +18,7 @@ Object.entries(process.env).forEach(([key, target]) => {
     servicePath,
     createProxyMiddleware({
       target,
-      pathRewrite: { [`^${servicePath}`]: '/' },
+      pathRewrite: { [`^${servicePath}`]: '' },
       changeOrigin: true ,
       logLevel: process.env.NODE_ENV === 'production' ? 'info' :'debug',
     })

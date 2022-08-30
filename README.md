@@ -3,13 +3,13 @@
 
 By this point your application must be able to do:
 
-- [ ] Products representation on Home page should be based on Product Service API.
-- [ ] Products are coming from Product DB.
-- [ ] Product images are not randomly generated on client side. Product image, same as another product model information
+- [x] Products representation on Home page should be based on Product Service API.
+- [x] Products are coming from Product DB.
+- [x] Product images are not randomly generated on client side. Product image, same as another product model information
 should be stored on BE side in Product DB.
-- [ ] Products might be created through CSV product file import from client side.
-- [ ] Cart might be created with appropriate product set.
-- [ ] Auth logic should be in place
+- [x] Products might be created through CSV product file import from client side.
+- [x] Cart might be created with appropriate product set.
+- [x] Auth logic should be in place
 
 Additional (optional) tasks
 
