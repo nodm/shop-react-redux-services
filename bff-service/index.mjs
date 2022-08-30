@@ -19,7 +19,7 @@ Object.entries(process.env).forEach(([key, target]) => {
     createProxyMiddleware({
       target,
       pathRewrite: { [`^${servicePath}`]: '' },
-      changeOrigin: true ,
+      changeOrigin: true,
       logLevel: process.env.NODE_ENV === 'production' ? 'info' :'debug',
     })
   );
