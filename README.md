@@ -1,5 +1,4 @@
 ## Module 09: Backend for Frontend
-### Application Functionality
 
 Links
 * [Product list](http://nodm-bff-develop.us-east-1.elasticbeanstalk.com/product)
@@ -7,23 +6,36 @@ Links
 * [Cart](http://nodm-bff-develop.us-east-1.elasticbeanstalk.com/cart)
 * [Unknown service](http://nodm-bff-develop.us-east-1.elasticbeanstalk.com/any)
 
+
+[PR to the CloudFront distribution repo](https://github.com/nodm/shop-react-redux-cloudfront/pull/6)
+_The branch will not be merged and deployed as the BFF supports the` HTTP` protocol only but the frontend is available on CloudFront via the `HTTPS` protocol._
+_The implementation **could be tested locally**:_
+```
+git clone https://github.com/nodm/shop-react-redux-cloudfront.git
+cd shop-react-redux-cloudfront
+git fetch
+git checkout TASK-09_backend-for-frontend-pattern
+npm start
+```
+
+### Application Functionality
+
 By this point your application must be able to do:
 
 - [x] Products representation on Home page should be based on Product Service API.
 - [x] Products are coming from Product DB.
 - [x] Product images are not randomly generated on client side. Product image, same as another product model information
-should be stored on BE side in Product DB.
+  should be stored on BE side in Product DB.
 - [x] Products might be created through CSV product file import from client side.
 - [x] Cart might be created with appropriate product set.
 - [x] Auth logic should be in place
 
-
 Additional (optional) tasks
 
 - [ ] +1 - Add a cache at the BFF Service level for a request to the getProductsList lambda function of the Product
-Service. The cache should expire in 2 minutes.
+  Service. The cache should expire in 2 minutes.
 
-    How to test:
+  How to test:
     - Get products list
     - Create new product
     - Get products list - result shouldn’t have new product
