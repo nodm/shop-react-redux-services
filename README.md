@@ -1,6 +1,12 @@
 ## Module 09: Backend for Frontend
 ### Application Functionality
 
+Links
+* [Product list](http://nodm-bff-develop.us-east-1.elasticbeanstalk.com/product)
+* [Product `Incredible Wooden Pizza`](http://nodm-bff-develop.us-east-1.elasticbeanstalk.com/product/ae4dd3cf-20e8-4d26-a496-4843d4a93759)
+* [Cart](http://nodm-bff-develop.us-east-1.elasticbeanstalk.com/cart)
+* [Unknown service](http://nodm-bff-develop.us-east-1.elasticbeanstalk.com/any)
+
 By this point your application must be able to do:
 
 - [x] Products representation on Home page should be based on Product Service API.
@@ -10,6 +16,7 @@ should be stored on BE side in Product DB.
 - [x] Products might be created through CSV product file import from client side.
 - [x] Cart might be created with appropriate product set.
 - [x] Auth logic should be in place
+
 
 Additional (optional) tasks
 
@@ -24,7 +31,6 @@ Service. The cache should expire in 2 minutes.
     - Get products list - result should have new product
 
 - [ ] +1 - Use NestJS to create BFF Service instead of Express
-
 
 ## Module 07: Authorization
 - [x]  1 - authorization-service is added to the repo, has correct basicAuthorizer lambda and correct serverless.yaml file
